@@ -5,7 +5,7 @@ module.exports = (err, req, res, next) => {
     err.message = err.message || "Erro interno no servidor";
 
     //controle de erro para ids fora do padrão mongodb
-    if(err.name === "CastError"){
+    if (err.name === "CastError") {
         const message = `Por favor, insira um id valido.`;
         err = new ErrorHandler(message, 400);
     }
