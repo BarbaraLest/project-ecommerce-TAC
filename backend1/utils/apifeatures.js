@@ -4,7 +4,6 @@ class ApiFeatures {
         this.queryStr = queryStr
     }
 
-    //paginação
 
     //buscando um produto
     search() {
@@ -22,7 +21,7 @@ class ApiFeatures {
     //filtrando a busca de produtos
     filter() {
         const queryCopy = { ...this.queryStr }
-      
+
         //removendo alguns campos da categoria
         const removeFields = ["keyword", "page", "limit"];
         removeFields.forEach(key => delete queryCopy[key]);
@@ -32,14 +31,14 @@ class ApiFeatures {
         queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, key => `$${key}`);
 
         this.query = this.query.find(JSON.parse(queryStr));
-        
+
         return this;
 
     }
 
 
     //paginação - limitação de exibição dos produtos por pagina
-    pagination(resultPerPage){
+    pagination(resultPerPage) {
         const currentPage = Number(this.queryStr.page) || 1;
 
         const skip = resultPerPage * (currentPage - 1);
