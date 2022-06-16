@@ -10,14 +10,34 @@ exports.createProduct = async (req, res, next) => {
     })
 }
 
-// buscar todos os produtos 
+//buscar todos os produtos 
 exports.getAllProducts = async (req, res) => {
     const products = await Product.find();
 
     res.status(200).json({ success: true, products })
 }
 
-// atualizar um produto - admin
+
+//buscar detalhes de um produto
+exports.getProductDetails = async (req, res, next) => {
+    const product = await Product.findById(req.params.id);
+
+    if (!product) {
+        return res.status(500).json({
+            sucess: false,
+            message: "Produto não encontrado"
+        })
+    }
+
+    res.status(200).json({
+        success: true,
+        product
+    })
+
+}
+
+
+//atualizar um produto - admin
 exports.updateProduct = async (req, res, next) => {
     let product = await Product.findById(req.params.id);
 
@@ -41,8 +61,7 @@ exports.updateProduct = async (req, res, next) => {
 }
 
 //Excluir um produto
-
-exports.deleteProduct = async(req, res, next) =>{
+exports.deleteProduct = async (req, res, next) => {
     const product = await Product.findById(req.params.id);
 
     if (!product) {
