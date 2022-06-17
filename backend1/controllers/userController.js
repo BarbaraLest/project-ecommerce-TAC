@@ -189,3 +189,66 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 		success: true,
 	});
 });
+
+//buscar todos os users (admin)
+exports.getAllUser = catchAsyncErrors(async (req, res, next) => {
+	const users = await User.find();
+
+	res.status(200).json({
+		success: true,
+		users,
+	});
+});
+
+//buscar um usuario (admin)
+exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
+	const user = await User.findById(req.params.id);
+
+	if (!user) {
+		return next(new ErrorHander(`Esse usuário não existe. ID: ${req.params.id}`));
+	}
+
+	res.status(200).json({
+		success: true,
+		user,
+	});
+});
+
+// Delete User --Admin
+exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
+	const user = await User.findById(req.params.id);
+
+	if (!user) {
+		return next(new ErrorHander(`Esse usuário não existe. ID: ${req.params.id}`, 400));
+	}
+
+	// const imageId = user.avatar.public_id;
+
+	// await cloudinary.v2.uploader.destroy(imageId);
+
+	await user.remove();
+
+	res.status(200).json({
+		success: true,
+		message: 'Usuário deletado',
+	});
+});
+
+// alterando o tipo de user -- Admin
+exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
+	const newUserData = {
+		name: req.body.name,
+		email: req.body.email,
+		role: req.body.role,
+	};
+
+	await User.findByIdAndUpdate(req.params.id, newUserData, {
+		new: true,
+		runValidators: true,
+		useFindAndModify: false,
+	});
+
+	res.status(200).json({
+		success: true,
+	});
+});
