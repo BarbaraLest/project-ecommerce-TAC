@@ -1,11 +1,12 @@
 const ErrorHander = require("../utils/errorHander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const User = require("../models/userModel");
+const sendToken = require("../utils/jwtToken");
 
 //Registrando um usuário
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-   
-    const { name, email, password } = req.body;
+
+  const { name, email, password } = req.body;
 
   const user = await User.create({
     name,
@@ -17,12 +18,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     },
   });
 
-  const token = user.getJWTToken();
-
-    res.status(201).json({
-        success: true,
-        token,
-    })
+  sendToken(user, 200, res);
 });
 
 
@@ -32,31 +28,25 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;
 
   //verificacao de senha/email usuario
-  if(!email || !password){
+  if (!email || !password) {
     return next(new ErrorHander("Por favor, insira um email e uma senha", 400))
   }
 
-  const user = await User.findOne({email}).select("+password");
+  const user = await User.findOne({ email }).select("+password");
 
-  if(!user){
+  if (!user) {
     return next(new ErrorHander("Email ou senha invalido", 401))
   }
 
   const isPasswordMatched = await user.comparePassword(password);
 
-  if(!isPasswordMatched){
+  if (!isPasswordMatched) {
     return next(new ErrorHander("Senha invalida", 401))
   }
 
-  const token = user.getJWTToken();
-
-    res.status(200).json({
-        success: true,
-        token,
-    })
+  sendToken(user, 200, res);
 
 
-  
 });
 
 
