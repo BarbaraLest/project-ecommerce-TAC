@@ -1,28 +1,27 @@
 import React, { Fragment, useEffect } from "react";
-import Product from "./Product.js";
-// import ProductCard from "./ProductCard.js";
+import ProductCard from "./ProductCard.js";
 import MetaData from "../layout/MetaData";
 // import { clearErrors, getProduct } from "../../actions/productAction";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../layout/Loader/Loader";
-// import { useAlert } from "react-alert";
+import { useAlert } from "react-alert";
 import "./Home.css";
-import { getProduct } from "../../actions/productAction";
+import { clearErrors, getProduct } from "../../actions/productAction";
 
 const Home = () => {
-  // const alert = useAlert();
+  const alert = useAlert();
   const dispatch = useDispatch();
   const { loading, error, products, productsCount } = useSelector(
     (state) => state.products
   );
 
   useEffect(() => {
-    // if (error) {
-    //  // alert.error(error);
-    //   dispatch(clearErrors());
-    // }
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
     dispatch(getProduct());
-  }, [dispatch]);
+  }, [dispatch, error, alert]);
 
   return (
     <Fragment>
@@ -44,7 +43,7 @@ const Home = () => {
 
           <div className="container" id="container">
             {products &&
-              products.map((product) => <Product product={product} />)}
+              products.map((product) => <ProductCard product={product} />)}
           </div>
         </Fragment>
       )}
