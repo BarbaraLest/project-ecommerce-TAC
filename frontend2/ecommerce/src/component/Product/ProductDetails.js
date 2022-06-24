@@ -44,7 +44,7 @@ const ProductDetails = ({ match }) => {
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title={`${product.name} -- ECOMMERCE`} />
+          <MetaData title={`${product.name}`} />
           <div className="ProductDetails">
             <div>
               <Container className="Container">
@@ -64,7 +64,7 @@ const ProductDetails = ({ match }) => {
             <div>
               <div className="detailsBlock-1">
                 <h2>{product.name}</h2>
-                <p>Product # {product._id}</p>
+                <p>Código do produto: {product._id}</p>
               </div>
               <div className="detailsBlock-2">
                 <ReactStars {...options} />
@@ -74,7 +74,7 @@ const ProductDetails = ({ match }) => {
                 </span>
               </div>
               <div className="detailsBlock-3">
-                <h1>{`R$ ${product.price}`}</h1>
+                <h1>{`R$ ${product.price},00`}</h1>
                 <div className="detailsBlock-3-1">
                   <div className="detailsBlock-3-1-1">
                     <button>-</button>
