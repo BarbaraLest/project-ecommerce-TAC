@@ -15,13 +15,13 @@ import {
   // reviewReducer,
 } from "./reducers/productReducer";
 
-// import {
-//   allUsersReducer,
-//   forgotPasswordReducer,
-//   profileReducer,
-//   userDetailsReducer,
-//   userReducer,
-// } from "./reducers/userReducer";
+import {
+  allUsersReducer,
+  forgotPasswordReducer,
+  profileReducer,
+  userDetailsReducer,
+  userReducer,
+} from "./reducers/userReducer";
 
 // import { cartReducer } from "./reducers/cartReducer";
 // import {
@@ -35,7 +35,7 @@ import {
 const reducer = combineReducers({
   products: productReducer,
   productDetails: productDetailsReducer,
-  //   user: userReducer,
+  user: userReducer,
   //   profile: profileReducer,
   //   forgotPassword: forgotPasswordReducer,
   //   cart: cartReducer,
