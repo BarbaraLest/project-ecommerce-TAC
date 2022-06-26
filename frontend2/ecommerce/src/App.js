@@ -13,7 +13,7 @@ import store from './store';
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Profile from "./component/User/Profile";
-
+import ProtectedRoute from "./component/Route/ProtectedRoute";
 
 
 
