@@ -6,33 +6,33 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ListAltIcon from "@material-ui/icons/ListAlt";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { useHistory } from "react-router-dom";
+//import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import { useParams } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { logout } from "../../../actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
 
 const UserOptions = ({ user }) => {
-  const { cartItems } = useSelector((state) => state.cart);
+  //   const { cartItems } = useSelector((state) => state.cart);
 
   const [open, setOpen] = useState(false);
-  const history = useHistory();
+  const history = useParams();
   const alert = useAlert();
   const dispatch = useDispatch();
 
   const options = [
-    { icon: <ListAltIcon />, name: "Orders", func: orders },
-    { icon: <PersonIcon />, name: "Profile", func: account },
-    {
-      icon: (
-        <ShoppingCartIcon
-          style={{ color: cartItems.length > 0 ? "tomato" : "unset" }}
-        />
-      ),
-      name: `Cart(${cartItems.length})`,
-      func: cart,
-    },
-    { icon: <ExitToAppIcon />, name: "Logout", func: logoutUser },
+    { icon: <ListAltIcon />, name: "Meus pedidos", func: orders },
+    { icon: <PersonIcon />, name: "Meu  perfil", func: account },
+    // {
+    //   icon: (
+    //     <ShoppingCartIcon
+    //       style={{ color: cartItems.length > 0 ? "tomato" : "unset" }}
+    //     />
+    //   ),
+    //   name: `Cart(${cartItems.length})`,
+    //   func: cart,
+    // },
+    { icon: <ExitToAppIcon />, name: "Desconectar", func: logoutUser },
   ];
 
   if (user.role === "admin") {
@@ -44,26 +44,27 @@ const UserOptions = ({ user }) => {
   }
 
   function dashboard() {
-    history.push("/admin/dashboard");
+    history("/admin/dashboard");
   }
 
   function orders() {
-    history.push("/orders");
+    history("/orders");
   }
   function account() {
-    history.push("/account");
+    history("/account");
   }
   function cart() {
-    history.push("/cart");
+    history("/cart");
   }
   function logoutUser() {
     dispatch(logout());
-    alert.success("Logout Successfully");
+    alert.success("Desconectado");
   }
 
   return (
     <Fragment>
-      <Backdrop open={open} style={{ zIndex: "10" }} />
+
+       <Backdrop open={open} style={{ zIndex: "10" }} /> 
       <SpeedDial
         ariaLabel="SpeedDial tooltip example"
         onClose={() => setOpen(false)}
@@ -89,6 +90,7 @@ const UserOptions = ({ user }) => {
             tooltipOpen={window.innerWidth <= 600 ? true : false}
           />
         ))}
+
       </SpeedDial>
     </Fragment>
   );
