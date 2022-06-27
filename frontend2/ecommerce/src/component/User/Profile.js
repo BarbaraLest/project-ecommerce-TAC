@@ -4,18 +4,36 @@ import MetaData from "../layout/MetaData";
 import Loader from "../layout/Loader/Loader";
 import { Link } from "react-router-dom";
 import "./Profile.css";
-import { useParams } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 const Profile = ({ history }) => {
   const { user, loading, isAuthenticated } = useSelector((state) => state.user);
-let params = useParams();
+  let navigate = useNavigate();
 
   useEffect(() => {
     if (isAuthenticated === false) {
-        history.push("/login");
+      navigate("/login");
     }
   }, [history, isAuthenticated]);
+  const meses = [
+    "Jan",
+    "Fev",
+    "Mar",
+    "Abr",
+    "Mai",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Set",
+    "Out",
+    "Nov",
+    "Dez",
+  ];
+
+  let data = new Date(String(user.createdAt));
+  let dataFormatada =
+    data.getDate() + " " + meses[data.getMonth()] + " " + data.getFullYear();
+
   return (
     <Fragment>
       {loading ? (
@@ -25,7 +43,7 @@ let params = useParams();
           <MetaData title={`${user.name}`} />
           <div className="profileContainer">
             <div>
-              <h1>Meu  Perfil</h1>
+              <h1>Meu Perfil</h1>
               <img src={user.avatar.url} alt={user.name} />
               <Link to="/me/update">Editar Perfil</Link>
             </div>
@@ -40,7 +58,7 @@ let params = useParams();
               </div>
               <div>
                 <h4>Usuário Desde</h4>
-                <p>{String(user.createdAt).substr(0, 10)}</p>
+                <p>{dataFormatada}</p>
               </div>
 
               <div>

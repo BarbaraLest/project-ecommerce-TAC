@@ -9,33 +9,26 @@ import Search from "./component/Product/Search";
 import LoginSignUp from "./component/User/LoginSignUp";
 import UserOptions from "./component/layout/Header/UserOptions";
 import { loadUser } from "./actions/userAction";
-import store from './store';
+import store from "./store";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Profile from "./component/User/Profile";
 import ProtectedRoute from "./component/Route/ProtectedRoute";
-
-
+import UpdateProfile from "./component/User/UpdateProfile";
 
 function App() {
-
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
-
   useEffect(() => {
-   
-
     store.dispatch(loadUser());
 
-   // getStripeApiKey();
+    // getStripeApiKey();
   }, []);
-
 
   return (
     <BrowserRouter>
       <Header />
-       {isAuthenticated && <UserOptions user={user} />} 
-      
+      {isAuthenticated && <UserOptions user={user} />}
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -44,8 +37,10 @@ function App() {
         <Route path="/products/:keyword" element={<Products />} />
         <Route path="/search" element={<Search />} />
         <Route path="/login" element={<LoginSignUp />} />
-        <Route path="/account" element={<Profile />} />
-
+        <Route path="/" element={<ProtectedRoute />}>
+          <Route path="/account" user={user} element={<Profile />} />
+          <Route path="/me/update" user={user} element={<UpdateProfile />} />
+        </Route>
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -7,7 +7,7 @@ import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 //import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { logout } from "../../../actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +16,7 @@ const UserOptions = ({ user }) => {
   //   const { cartItems } = useSelector((state) => state.cart);
 
   const [open, setOpen] = useState(false);
-  const history = useParams();
+  const navigate = useNavigate();
   const alert = useAlert();
   const dispatch = useDispatch();
 
@@ -44,17 +44,17 @@ const UserOptions = ({ user }) => {
   }
 
   function dashboard() {
-    history("/admin/dashboard");
+    navigate("/admin/dashboard");
   }
 
   function orders() {
-    history("/orders");
+    navigate("/orders");
   }
   function account() {
-    history("/account");
+    navigate("/account");
   }
   function cart() {
-    history("/cart");
+    navigate("/cart");
   }
   function logoutUser() {
     dispatch(logout());
@@ -63,8 +63,7 @@ const UserOptions = ({ user }) => {
 
   return (
     <Fragment>
-
-       <Backdrop open={open} style={{ zIndex: "10" }} /> 
+      <Backdrop open={open} style={{ zIndex: "10" }} />
       <SpeedDial
         ariaLabel="SpeedDial tooltip example"
         onClose={() => setOpen(false)}
@@ -90,7 +89,6 @@ const UserOptions = ({ user }) => {
             tooltipOpen={window.innerWidth <= 600 ? true : false}
           />
         ))}
-
       </SpeedDial>
     </Fragment>
   );
