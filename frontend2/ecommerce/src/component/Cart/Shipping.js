@@ -12,11 +12,13 @@ import TransferWithinAStationIcon from "@material-ui/icons/TransferWithinAStatio
 import { Country, State } from "country-state-city";
 import { useAlert } from "react-alert";
 import CheckoutSteps from "../Cart/CheckoutSteps";
+import { useNavigate } from "react-router-dom";
 
 const Shipping = ({ history }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const { shippingInfo } = useSelector((state) => state.cart);
+  let navigate = useNavigate();
 
   const [address, setAddress] = useState(shippingInfo.address);
   const [city, setCity] = useState(shippingInfo.city);
@@ -29,24 +31,24 @@ const Shipping = ({ history }) => {
     e.preventDefault();
 
     if (phoneNo.length < 10 || phoneNo.length > 10) {
-      alert.error("Phone Number should be 10 digits Long");
+      alert.error("Digite um telefone válido");
       return;
     }
     dispatch(
       saveShippingInfo({ address, city, state, country, pinCode, phoneNo })
     );
-    history.push("/order/confirm");
+    navigate("/pedido/confirmacao");
   };
 
   return (
     <Fragment>
-      <MetaData title="Shipping Details" />
-
+      <MetaData title="Detalhes de envio" />
+      <div className="space"></div>
       <CheckoutSteps activeStep={0} />
 
       <div className="shippingContainer">
         <div className="shippingBox">
-          <h2 className="shippingHeading">Shipping Details</h2>
+          <h2 className="shippingHeading">Detalhes De Envio</h2>
 
           <form
             className="shippingForm"
@@ -57,7 +59,7 @@ const Shipping = ({ history }) => {
               <HomeIcon />
               <input
                 type="text"
-                placeholder="Address"
+                placeholder="Endereço"
                 required
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
@@ -68,7 +70,7 @@ const Shipping = ({ history }) => {
               <LocationCityIcon />
               <input
                 type="text"
-                placeholder="City"
+                placeholder="Cidade"
                 required
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
@@ -79,7 +81,7 @@ const Shipping = ({ history }) => {
               <PinDropIcon />
               <input
                 type="number"
-                placeholder="Pin Code"
+                placeholder="CEP"
                 required
                 value={pinCode}
                 onChange={(e) => setPinCode(e.target.value)}
@@ -90,7 +92,7 @@ const Shipping = ({ history }) => {
               <PhoneIcon />
               <input
                 type="number"
-                placeholder="Phone Number"
+                placeholder="Telefone"
                 required
                 value={phoneNo}
                 onChange={(e) => setPhoneNo(e.target.value)}
@@ -106,7 +108,7 @@ const Shipping = ({ history }) => {
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
               >
-                <option value="">Country</option>
+                <option value="">País</option>
                 {Country &&
                   Country.getAllCountries().map((item) => (
                     <option key={item.isoCode} value={item.isoCode}>
@@ -125,7 +127,7 @@ const Shipping = ({ history }) => {
                   value={state}
                   onChange={(e) => setState(e.target.value)}
                 >
-                  <option value="">State</option>
+                  <option value="">Estado</option>
                   {State &&
                     State.getStatesOfCountry(country).map((item) => (
                       <option key={item.isoCode} value={item.isoCode}>
@@ -138,7 +140,7 @@ const Shipping = ({ history }) => {
 
             <input
               type="submit"
-              value="Continue"
+              value="Continuar"
               className="shippingBtn"
               disabled={state ? false : true}
             />

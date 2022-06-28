@@ -34,7 +34,7 @@ const Cart = ({ history }) => {
   };
 
   const checkoutHandler = () => {
-    navigate("/login?redirect=shipping");
+    navigate("/login?redirect=enviar");
   };
 
   return (

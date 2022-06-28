@@ -5,10 +5,12 @@ import MetaData from "../layout/MetaData";
 import "./ConfirmOrder.css";
 import { Link } from "react-router-dom";
 import { Typography } from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
 
 const ConfirmOrder = ({ history }) => {
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
+  let navigate = useNavigate();
 
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.quantity * item.price,
@@ -33,34 +35,35 @@ const ConfirmOrder = ({ history }) => {
 
     sessionStorage.setItem("orderInfo", JSON.stringify(data));
 
-    history.push("/process/payment");
+    navigate("/processamento/pagamento");
   };
 
   return (
     <Fragment>
-      <MetaData title="Confirm Order" />
+      <MetaData title="Confirmação Pedido" />
+      <div className="space"></div>
       <CheckoutSteps activeStep={1} />
       <div className="confirmOrderPage">
         <div>
           <div className="confirmshippingArea">
-            <Typography>Shipping Info</Typography>
+            <Typography>Informações do Pedido</Typography>
             <div className="confirmshippingAreaBox">
               <div>
-                <p>Name:</p>
+                <p>Nome:</p>
                 <span>{user.name}</span>
               </div>
               <div>
-                <p>Phone:</p>
+                <p>Telefone:</p>
                 <span>{shippingInfo.phoneNo}</span>
               </div>
               <div>
-                <p>Address:</p>
+                <p>Endereço:</p>
                 <span>{address}</span>
               </div>
             </div>
           </div>
           <div className="confirmCartItems">
-            <Typography>Your Cart Items:</Typography>
+            <Typography>Itens do pedido:</Typography>
             <div className="confirmCartItemsContainer">
               {cartItems &&
                 cartItems.map((item) => (
@@ -70,8 +73,8 @@ const ConfirmOrder = ({ history }) => {
                       {item.name}
                     </Link>{" "}
                     <span>
-                      {item.quantity} X ₹{item.price} ={" "}
-                      <b>₹{item.price * item.quantity}</b>
+                      {item.quantity} x R${item.price},00 ={" "}
+                      <b>R${item.price * item.quantity}</b>
                     </span>
                   </div>
                 ))}
@@ -81,19 +84,19 @@ const ConfirmOrder = ({ history }) => {
         {/*  */}
         <div>
           <div className="orderSummary">
-            <Typography>Order Summery</Typography>
+            <Typography>Total</Typography>
             <div>
               <div>
                 <p>Subtotal:</p>
-                <span>₹{subtotal}</span>
+                <span>R$ {subtotal},00</span>
               </div>
               <div>
-                <p>Shipping Charges:</p>
-                <span>₹{shippingCharges}</span>
+                <p>Taxa de envio:</p>
+                <span>R$ {shippingCharges},00</span>
               </div>
               <div>
-                <p>GST:</p>
-                <span>₹{tax}</span>
+                <p>Taxas:</p>
+                <span>R$ {tax},00</span>
               </div>
             </div>
 
@@ -101,10 +104,10 @@ const ConfirmOrder = ({ history }) => {
               <p>
                 <b>Total:</b>
               </p>
-              <span>₹{totalPrice}</span>
+              <span>R$ {totalPrice},00</span>
             </div>
 
-            <button onClick={proceedToPayment}>Proceed To Payment</button>
+            <button onClick={proceedToPayment}>Finalizar Compra</button>
           </div>
         </div>
       </div>
