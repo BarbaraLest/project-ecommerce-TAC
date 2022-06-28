@@ -81,7 +81,7 @@ const LoginSignUp = ({ history, location }) => {
     }
 
     if (isAuthenticated) {
-      navigate("/account");
+      navigate("/perfil");
     }
   }, [dispatch, error, alert, navigate, isAuthenticated]);
   //, history, isAuthenticated, redirect
@@ -142,7 +142,7 @@ const LoginSignUp = ({ history, location }) => {
                     onChange={(e) => setLoginPassword(e.target.value)}
                   />
                 </div>
-                <Link to="/password/forgot">Esqueceu a sua senha?</Link>
+                <Link to="/senha/esqueci">Esqueceu a sua senha?</Link>
                 <input type="submit" value="Login" className="loginBtn" />
               </form>
 

@@ -51,7 +51,7 @@ const UserOptions = ({ user }) => {
     navigate("/orders");
   }
   function account() {
-    navigate("/account");
+    navigate("/perfil");
   }
   function cart() {
     navigate("/cart");

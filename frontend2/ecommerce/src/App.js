@@ -15,6 +15,9 @@ import { useEffect, useState } from "react";
 import Profile from "./component/User/Profile";
 import ProtectedRoute from "./component/Route/ProtectedRoute";
 import UpdateProfile from "./component/User/UpdateProfile";
+import UpdatePassword from "./component/User/UpdatePassword";
+import ForgotPassword from "./component/User/ForgotPassword";
+import ResetPassword from "./component/User/ResetPassword";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -38,9 +41,12 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/login" element={<LoginSignUp />} />
         <Route path="/" element={<ProtectedRoute />}>
-          <Route path="/account" user={user} element={<Profile />} />
+          <Route path="/perfil" user={user} element={<Profile />} />
           <Route path="/me/update" user={user} element={<UpdateProfile />} />
+          <Route path="/senha/atualizar" element={<UpdatePassword />} />
         </Route>
+        <Route path="/senha/esqueci" element={<ForgotPassword />} />
+        <Route path="/senha/reset/:token" element={<ResetPassword />} />
       </Routes>
       <Footer />
     </BrowserRouter>

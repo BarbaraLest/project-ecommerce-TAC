@@ -78,9 +78,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
-  const resetPasswordUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/password/reset/${resetToken}`;
+  const resetPasswordUrl = `${process.env.FRONTEND_URL}/senha/reset/${resetToken}`;
 
   const message = `O seu token de recuperação de senha é: - \n\n ${resetPasswordUrl}`;
 

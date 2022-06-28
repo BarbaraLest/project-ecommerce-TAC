@@ -63,7 +63,7 @@ const Profile = ({ history }) => {
 
               <div>
                 <Link to="/orders">Meus Pedidos</Link>
-                <Link to="/password/update">Trocar Minha Senha</Link>
+                <Link to="/senha/atualizar">Trocar Minha Senha</Link>
               </div>
             </div>
           </div>
