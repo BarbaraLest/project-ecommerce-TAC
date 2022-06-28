@@ -24,6 +24,8 @@ import ConfirmOrder from "./component/Cart/ConfirmOrder";
 import OrderSucess from "./component/Cart/OrderSuccess";
 import axios from "axios";
 import Wrapper from "./component/Cart/Payment";
+import MyOrders from "./component/Order/MyOrders";
+import OrderDetails from "./component/Order/OrderDetails";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -52,6 +54,8 @@ function App() {
           <Route path="/pedido/confirmacao" element={<ConfirmOrder />} />
           <Route path="/processamento/pagamento" element={<Wrapper />} />
           <Route path="/sucesso" element={<OrderSucess />} />
+          <Route path="/pedidos" element={<MyOrders />} />
+          <Route path="/order/:id" element={<OrderDetails />} />
         </Route>
         <Route path="/senha/esqueci" element={<ForgotPassword />} />
         <Route path="/senha/reset/:token" element={<ResetPassword />} />

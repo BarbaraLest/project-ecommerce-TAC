@@ -48,7 +48,7 @@ const UserOptions = ({ user }) => {
   }
 
   function orders() {
-    navigate("/orders");
+    navigate("/pedidos");
   }
   function account() {
     navigate("/perfil");
