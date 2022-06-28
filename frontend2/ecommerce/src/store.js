@@ -7,7 +7,7 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import {
   //  newProductReducer,
-  //  newReviewReducer,
+  newReviewReducer,
   productDetailsReducer,
   productReducer,
   // productReviewsReducer,
@@ -42,7 +42,7 @@ const reducer = combineReducers({
   newOrder: newOrderReducer,
   myOrders: myOrdersReducer,
   orderDetails: orderDetailsReducer,
-  //   newReview: newReviewReducer,
+  newReview: newReviewReducer,
   //   newProduct: newProductReducer,
   //   product: productReducer,
   //   allOrders: allOrdersReducer,
