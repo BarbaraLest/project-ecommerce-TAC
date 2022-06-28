@@ -6,14 +6,14 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ListAltIcon from "@material-ui/icons/ListAlt";
-//import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { logout } from "../../../actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
 
 const UserOptions = ({ user }) => {
-  //   const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
@@ -23,15 +23,15 @@ const UserOptions = ({ user }) => {
   const options = [
     { icon: <ListAltIcon />, name: "Meus pedidos", func: orders },
     { icon: <PersonIcon />, name: "Meu  perfil", func: account },
-    // {
-    //   icon: (
-    //     <ShoppingCartIcon
-    //       style={{ color: cartItems.length > 0 ? "tomato" : "unset" }}
-    //     />
-    //   ),
-    //   name: `Cart(${cartItems.length})`,
-    //   func: cart,
-    // },
+    {
+      icon: (
+        <ShoppingCartIcon
+          style={{ color: cartItems.length > 0 ? "#e77899" : "unset" }}
+        />
+      ),
+      name: `Carrinho: (${cartItems.length}) item`,
+      func: cart,
+    },
     { icon: <ExitToAppIcon />, name: "Desconectar", func: logoutUser },
   ];
 
@@ -54,7 +54,7 @@ const UserOptions = ({ user }) => {
     navigate("/perfil");
   }
   function cart() {
-    navigate("/cart");
+    navigate("/carrinho");
   }
   function logoutUser() {
     dispatch(logout());
