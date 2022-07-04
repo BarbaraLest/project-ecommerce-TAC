@@ -6,13 +6,13 @@ import {
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import {
-  //  newProductReducer,
+  newProductReducer,
   newReviewReducer,
   productDetailsReducer,
+  productsReducer,
+  productReviewsReducer,
   productReducer,
-  // productReviewsReducer,
-  // productsReducer,
-  // reviewReducer,
+  reviewReducer,
 } from "./reducers/productReducer";
 
 import {
@@ -33,7 +33,7 @@ import {
 } from "./reducers/orderReducer";
 
 const reducer = combineReducers({
-  products: productReducer,
+  products: productsReducer,
   productDetails: productDetailsReducer,
   user: userReducer,
   profile: profileReducer,
@@ -43,14 +43,14 @@ const reducer = combineReducers({
   myOrders: myOrdersReducer,
   orderDetails: orderDetailsReducer,
   newReview: newReviewReducer,
-  //   newProduct: newProductReducer,
-  //   product: productReducer,
-  //   allOrders: allOrdersReducer,
-  //   order: orderReducer,
-  //   allUsers: allUsersReducer,
-  //   userDetails: userDetailsReducer,
-  //   productReviews: productReviewsReducer,
-  //   review: reviewReducer,
+  newProduct: newProductReducer,
+  product: productReducer,
+  allOrders: allOrdersReducer,
+  order: orderReducer,
+  allUsers: allUsersReducer,
+  userDetails: userDetailsReducer,
+  productReviews: productReviewsReducer,
+  review: reviewReducer,
 });
 
 let initialState = {
