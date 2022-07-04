@@ -12,17 +12,17 @@ const options = {
   link1Text: "Home",
   link2Text: "Produtos",
   link3Text: "Contato",
-  link4Text: "Sobre nós",
+
   link1Url: "/",
   link2Url: "/products",
-  link3Url: "/contact",
-  link4Url: "/about",
+  link3Url: "/about",
+
   link1Size: "1.3vmax",
   link1Color: "rgba(35, 35, 35,0.8)",
   nav1justifyContent: "flex-end",
   nav2justifyContent: "flex-end",
   nav3justifyContent: "flex-start",
-  nav4justifyContent: "flex-start",
+
   link1ColorHover: "#e77899",
   link1Margin: "1vmax",
   profileIconUrl: "/login",

@@ -36,6 +36,7 @@ import ProcessOrder from "./component/Admin/ProcessOrder";
 import UsersList from "./component/Admin/UsersList";
 import UpdateUser from "./component/Admin/UpdateUser";
 import ProductReviews from "./component/Admin/ProductReviews";
+import About from "./component/layout/About/About";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -56,6 +57,7 @@ function App() {
         <Route path="/products/:keyword" element={<Products />} />
         <Route path="/search" element={<Search />} />
         <Route path="/login" element={<LoginSignUp />} />
+        <Route path="/about" element={<About />} />
         <Route path="/" element={<ProtectedRoute />}>
           <Route path="/perfil" user={user} element={<Profile />} />
           <Route path="/me/update" user={user} element={<UpdateProfile />} />
