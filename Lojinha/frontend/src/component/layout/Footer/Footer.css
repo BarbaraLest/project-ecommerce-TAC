@@ -1,0 +1,25 @@
+footer {
+  margin-top: 10vmax;
+  padding: 2vmax;
+  background-color: #6e1d57;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.midFooter {
+  width: 100%;
+  align-items: center;
+  text-align: center;
+}
+
+.midFooter > h1 {
+  font-size: 4vmax;
+  font-family: "Roboto";
+  color: #eddab9;
+}
+
+.midFooter>p {
+  font-family: "Roboto";
+  color: #eddab9;
+}

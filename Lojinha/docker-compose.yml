@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  nginx:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: nginx
+    container_name: container-lb
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+      - frontend
+  backend:
+    image: lojinha/backend
+    container_name: container-app1
+    ports:
+      - 3000:3000
+  frontend:
+    image: lojinha/frontend
+    container_name: container-app2
+    depends_on:
+      - backend
+    ports:
+      - 4001:3000
